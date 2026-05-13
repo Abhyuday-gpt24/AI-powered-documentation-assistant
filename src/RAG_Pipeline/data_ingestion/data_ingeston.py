@@ -309,8 +309,7 @@ def run_pipeline(
 
 
 # Let's Run data ingestion Pipeline
-dir_path = Path("data/fastapi/docs").resolve()
-print("path : =================" , dir_path)
-run_pipeline(docs_path=dir_path, project="fastapi",max_workers=8, fresh=True)
+# dir_path = Path("data/fastapi/docs").resolve()
+# run_pipeline(docs_path=dir_path, project="fastapi",max_workers=8, fresh=True)
 
 
