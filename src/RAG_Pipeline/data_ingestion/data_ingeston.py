@@ -7,9 +7,11 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 import time
 import os
+from dotenv import load_dotenv
 from langchain_openai import OpenAIEmbeddings
 
-
+load_dotenv()
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 
 def collect_files(dir_path: str)-> list[str]:
@@ -212,7 +214,7 @@ def run_pipeline(
     project:str, 
     batch_size:int = 20, 
     max_workers:int = None, 
-    persist_dir: str = "../vectorstore", 
+    persist_dir: str = "vectorstore", 
     embedding_model:str = "text-embedding-3-small", 
     fresh:bool = True
 ):
@@ -307,7 +309,8 @@ def run_pipeline(
 
 
 # Let's Run data ingestion Pipeline
-dir_path = "../data/fastapi/docs"
-run_pipeline(docs_path=dir_path, project="fastapi",max_workers=8, fresh=True )
+dir_path = Path("data/fastapi/docs").resolve()
+print("path : =================" , dir_path)
+run_pipeline(docs_path=dir_path, project="fastapi",max_workers=8, fresh=True)
 
 
