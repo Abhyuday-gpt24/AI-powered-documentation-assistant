@@ -9,4 +9,6 @@ langchain-groq
 langchain-openrouter
 ipykernel
 langchain-chroma
-
+gradio
+python-dotenv
+langchain-mcp-adapters
