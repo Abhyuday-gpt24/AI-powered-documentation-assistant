@@ -5,11 +5,8 @@ import asyncio
 
 
 # All tools 
-retrieve_tool = retrieve_tool
 web_search_tools = asyncio.run(load_tool())
-
-
-all_tools = [retrieve_tool,*web_search_tools]
+all_tools = [retrieve_tool, *web_search_tools]
 
 
 
