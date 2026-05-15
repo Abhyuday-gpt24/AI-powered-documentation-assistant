@@ -22,7 +22,13 @@ class AgentState(TypedDict):
 # Agent Node
 async def agent_node(AgentState: AgentState) -> AgentState:
     response = await gpt_5_nano_model_with_tools.ainvoke([SystemMessage(AGENT_SYS_PROMPT), *AgentState["messages"]])
-    return {"messages": [response]}
+    return {"messages": response}
+    
+
+def token_check_node(AgentState: AgentState):
+    context_tokens = AgentState["messages"][-1].usage_metadata["input_tokens"]
+    if context_tokens > 2000:
+        print("----------------------------------- ALERT TOKEN LIMIT REACHED ----------------------------------")
 
 
 
@@ -30,9 +36,11 @@ def graph_build():
     graph = StateGraph(AgentState)
     graph.add_node("agent_node", agent_node)
     graph.add_node("tools",ToolNode(all_tools))
+    graph.add_node("token_check", token_check_node)
     graph.add_edge(START, "agent_node")
     graph.add_conditional_edges("agent_node",tools_condition)
     graph.add_edge("tools","agent_node")
+    graph.add_edge("token_check", END)
     return graph.compile(checkpointer=MemorySaver())
 
 

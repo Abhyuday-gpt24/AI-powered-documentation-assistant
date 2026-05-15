@@ -11,8 +11,8 @@ vector_store = Chroma(
 )
 
 
-@tool
-def search_with_threshold(
+@tool()
+def retrieve_tool(
     query: str,
     project: str | None = None,
 ) -> str:
@@ -28,7 +28,9 @@ def search_with_threshold(
     fallback_k = 3
 
     search_kwargs = {"k": k}
+    
     if project:
+        project = project.lower()
         search_kwargs["filter"] = {"project": project}
 
     raw = vector_store.similarity_search_with_score(query, **search_kwargs)
