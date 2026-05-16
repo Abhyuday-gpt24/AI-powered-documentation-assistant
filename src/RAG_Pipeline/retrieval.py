@@ -6,7 +6,7 @@ embedding_model = "text-embedding-3-small"
 embeddings = OpenAIEmbeddings(model=embedding_model)
 
 # Define all your collection names
-COLLECTION_NAMES = ["hf_transformers"]
+COLLECTION_NAMES = ["hf_transformers", "nextjs"]
 
 # Initialize all vector stores in a dict
 vector_stores: dict[str, Chroma] = {
@@ -30,7 +30,7 @@ def retrieve_tool(
     Args:
         query: The user's search query to find matching documents.
         collection: Which knowledge base collection to search.
-                    Must be one of: hf_transformers.
+                    Must be one of: hf_transformers, nextjs.
                     If not specified, searches ALL collections.
         project: Project name will be same as the collection.
     """
