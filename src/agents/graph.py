@@ -15,7 +15,6 @@ def graph_build():
     graph.add_node("kb_retrieval", retrieve_tool)
     graph.add_node("web_search", web_search)
     graph.add_node("synthesizer_agent_node", synthesizer_agent_node)
-    # graph.add_node("structured_response", structured_response)
     graph.add_node("token_check", token_check_node)
 
     graph.add_edge(START, "query_analyzer_node")

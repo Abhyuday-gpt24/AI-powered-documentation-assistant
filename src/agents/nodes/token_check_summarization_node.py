@@ -1,5 +1,5 @@
 from src.agents.graph_state import AgentState
-from src.models.models_with_tools import gpt_5_nano_model, groq_gpt_model_with_tools, deepseek_flash_model_with_tools
+from src.models.models import gpt_5_nano_model
 from src.agents.sys_prompts.conv_summarizer_sys_prompt import CONV_SUMMARIZER_SYS_PROMPT
 from langchain_core.messages import HumanMessage, SystemMessage, RemoveMessage
 

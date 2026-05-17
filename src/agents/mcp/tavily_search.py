@@ -2,30 +2,13 @@
 # For MCP Server
 import asyncio
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.interceptors import MCPToolCallRequest
-from langchain_core.messages import SystemMessage, HumanMessage
 from src.models.models import groq_gpt_model
 from src.agents.graph_state import AgentState
 import os
 from dotenv import load_dotenv
+from langsmith import traceable
 load_dotenv()
 
-
-MAX_CONTENT_SIZE = 2000
-
-web_summerisation_sys_prompt = SystemMessage("""You are an content  summeriser.
-You need to  summerise the given data.
-You will be provided the web search scrapped data and you need to  summerise it in a concise manner.
-Make sure to  summerise the content in 1200 words.
-And make sure the metadata is there as well like source of the content etc.
-Here is the web search content: """)
-
-
-async def summarizer_interceptor(content: str):
-    result = await groq_gpt_model.ainvoke([web_summerisation_sys_prompt, HumanMessage(content)])
-    print("NEW WEB SEARCH: ")
-    print(result.content)
-    return result.content
 
 # Tavily MCP Handshake
 TAVILY_MCP_LINK = os.environ.get("TAVILY_MCP_LINK")
@@ -41,25 +24,24 @@ web_search_mcp_client = MultiServerMCPClient(
     }
 )
 
-async def load_tool():
-    return await web_search_mcp_client.get_tools()
+web_search_tavily_tool = None
+async def load_search_tool():
+    global web_search_tavily_tool
+    if web_search_tavily_tool is None:
+        tools = await web_search_mcp_client.get_tools()
+        web_search_tavily_tool = next(t for t in tools if t.name == "tavily_search")
 
-async def web_search(State: AgentState) -> AgentState:
-    query = State.get("reframed_query") or State["query"]
 
-    # get_tools() returns a list — find the right tool
-    tools = await web_search_mcp_client.get_tools()
-    tavily_tool = next(t for t in tools if t.name == "tavily_search")
 
-    result = await tavily_tool.ainvoke({"query": query})
+async def web_search(query: str) -> AgentState:
+    
+    await load_search_tool()
+    result = await web_search_tavily_tool.ainvoke({"query": query})
 
     if hasattr(result, "content"):
         content = result.content
     else:
         content = str(result)
 
-    res = await summarizer_interceptor(content)
-    return {"web_search_result": res}
+    return {"web_search_result": content[:3000]}
 
-
-# print(f"Loaded {len(web_search_tools)} tools from Tavily MCP: {[t.name for t in web_search_tools]}")

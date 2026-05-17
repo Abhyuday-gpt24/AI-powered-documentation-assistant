@@ -10,7 +10,7 @@ vector_store = Chroma(
 )
 
 
-def retrieve_function(query: str, k: int = 5) -> str:
+def retrieve_function(query: str, k: int = 2) -> str:
     search_kwargs = {"k": k}
     search_kwargs["filter"] = {"project": "nextjs"}
     results = vector_store.similarity_search_with_score(query, **search_kwargs)

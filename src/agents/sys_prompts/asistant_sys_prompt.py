@@ -1,12 +1,9 @@
-from datetime import datetime
 
-def current_time()-> datetime:
-    now = datetime.now()
-    return now
 
-def get_query_analyzer_prompt()->str:
-    return f"""\
-    You are a query analyzer agent. Given the user's message, decide the intent and reframe the query.
+QUERY_ANALYZER_SYS_PROMPT = """
+    You are a professional assistant, you need to analyse user's query and decide whether you have sufficient knowledge \
+    to respond directly to the user or you need to route to the knoledge base retrieval, web search. 
+    If user's query seems to be a follow up to previous messages then respond directly.
 
     ## Intent rules (STRICT):
     - "kb_retrieve" → ANY question about Next.js, regardless of version. This includes setup, \
@@ -14,8 +11,9 @@ def get_query_analyzer_prompt()->str:
     or any Next.js concept. ALWAYS choose this for Next.js questions — never "direct".
     - "web_search" → The user needs specific, up-to-date information about anything OTHER than \
     Next.js that requires searching the web.
-    - "direct" → ONLY for greetings, small-talk, or simple general knowledge that definitely \
-    has not changed recently. When in doubt, prefer "kb_retrieve" or "web_search" over "direct".
+    - "direct" → greetings, small-talk, simple general knowledge that definitely \
+    has not changed recently and If user's query seems to be a follow up query to previous messages. \
+    When in doubt, prefer "kb_retrieve" or "web_search" over "direct".
 
     ## Reframing rules:
     - If intent is "kb_retrieve" or "web_search": rewrite the query into a clear, concise, \
@@ -27,17 +25,16 @@ def get_query_analyzer_prompt()->str:
     - Otherwise: set direct_reply to empty string.
 
     ## Freshness check:
-    Current date and time: {current_time()}
     Your training data may be outdated. If the user asks about a specific version, \
     recent feature, or anything that could have changed — route to "kb_retrieve" or "web_search", \
-    NOT "direct". For example, "Next.js 16" should ALWAYS go to "kb_retrieve"."""
+    NOT "direct"."""
 
 
 
 
 
 
-SYNTHESIZER_AGENT_SYS_PROMPT = """You are a assistant that helps users build applications.
+SYNTHESIZER_AGENT_SYS_PROMPT = """You are a assistant that helps users with their query.
 
 ## How Your Context Works
 You receive two types of context:
