@@ -9,15 +9,19 @@ def new_thread_id() -> str:
     return str(uuid.uuid4())
 
 async def chatbot_func(message: str, history: list[dict], thread_id: str) -> str:
-    """Called by Gradio on each user message. Returns assistant reply."""
     config = {"configurable": {"thread_id": thread_id}}
     result = await graph.ainvoke(
-        {"messages": [HumanMessage(content=message)]},
+        {
+            "messages": [HumanMessage(content=message)],
+            "query": message,
+            "retrieval_result": "",
+            "web_search_result": "",
+            "summary": "",
+            "direct_reply": "",
+        },
         config=config,
     )
     return result["messages"][-1].content
-
-
 
 
 # UI

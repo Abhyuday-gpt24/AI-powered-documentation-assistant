@@ -20,7 +20,7 @@ def collect_files(dir_path: str)-> list[str]:
     if not doc_path.exists():
         raise FileNotFoundError(f"Path does not exist: {doc_path}")
     
-    file_paths = [str(f) for f in sorted(doc_path.rglob("*.mdx"))]
+    file_paths = [str(f) for f in sorted(doc_path.rglob("*.md"))]
     return file_paths
 
 
@@ -34,9 +34,11 @@ def clean_markdown(text: str) -> str:
     text = re.sub(r"<style[\s\S]*?</style>", "", text)
 
     # Remove HTML tags but keep their text content
+    # <p align="center">FastAPI is great</p> → FastAPI is great
     text = re.sub(r"<[^>]+>", "", text)
 
     # Remove image markdown that are just badges
+    # ![Test](https://img.shields.io/...) → removed
     text = re.sub(r"!\[.*?\]\(https://img\.shields\.io/.*?\)", "", text)
 
     # Remove excessive blank lines left behind
@@ -89,7 +91,7 @@ def chunk_file(filepath: str) -> list[dict]:
     md_sections = md_splitter.split_text(doc["content"])
 
     char_splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 1500,
+        chunk_size = 500,
         chunk_overlap = 100,
         separators=[
             "\n```\n",
@@ -133,16 +135,6 @@ def chunk_file(filepath: str) -> list[dict]:
 
 # Chunking in batches 
 def chunk_batchs_in_multiprocess(file_paths: list[str], max_workers:int = None) -> list[dict]:
-    """
-    Chunk multiple files in parallel using ProcessPoolExecutor.
- 
-    Args:
-        file_paths:  List of markdown file paths.
-        max_workers: Number of parallel processes (defaults to CPU count).
- 
-    Returns:
-        List of chunk dicts from all files in this batch.
-    """
 
     if max_workers is None :
         max_workers = min(os.cpu_count(), len(file_paths))
@@ -307,7 +299,7 @@ def run_pipeline(
 
 
 # Let's Run data ingestion Pipeline
-dir_path = Path("data/next_js/docs").resolve()
-run_pipeline(docs_path=dir_path, project="nextjs",max_workers=8, fresh=True)
+# dir_path = Path("data/fastapi/docs").resolve()
+# run_pipeline(docs_path=dir_path, project="fastapi",max_workers=8, fresh=True)
 
 

@@ -1,5 +1,5 @@
 from src.agents.mcp.tavily_search import load_tool
-from src.rag_pipeline.retrieval import retrieve_tool
+from src.agents.tools.retrieval_tool import retrieve_tool
 from langchain_core.documents import Document
 import asyncio
 
