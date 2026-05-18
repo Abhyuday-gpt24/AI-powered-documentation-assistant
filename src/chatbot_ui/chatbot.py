@@ -16,7 +16,7 @@ def new_thread_id() -> str:
 async def chatbot_func(message: str, history: list[dict], thread_id: str) :
     config = {"configurable": {"thread_id": thread_id}}
     input_data = {
-        "messages": [HumanMessage(content=(message))],
+        "messages": [HumanMessage(content=(message + f"\n Current date and time : {current_time()}"))],
         "retrieval_result": "",
         "web_search_result": "",
         "intent": "",
@@ -45,7 +45,6 @@ async def chatbot_func(message: str, history: list[dict], thread_id: str) :
 
 # UI
 with chatbox.Blocks(title="AI-powered documentation assistant") as ai_powered_documentation_assistant:
-    chatbox.Markdown("# AI-powered documentation assistant v0")
  
     thread_id = chatbox.State(value=new_thread_id)
  

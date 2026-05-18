@@ -16,11 +16,10 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 def collect_files(dir_path: str)-> list[str]:
     """Collects all file paths into a list"""
-    doc_path = Path(dir_path).resolve()
-    if not doc_path.exists():
-        raise FileNotFoundError(f"Path does not exist: {doc_path}")
+    if not dir_path.exists():
+        raise FileNotFoundError(f"Path does not exist: {dir_path}")
     
-    file_paths = [str(f) for f in sorted(doc_path.rglob("*.md"))]
+    file_paths = [str(f) for f in sorted(dir_path.rglob("*.mdx"))]
     return file_paths
 
 
@@ -34,7 +33,6 @@ def clean_markdown(text: str) -> str:
     text = re.sub(r"<style[\s\S]*?</style>", "", text)
 
     # Remove HTML tags but keep their text content
-    # <p align="center">FastAPI is great</p> → FastAPI is great
     text = re.sub(r"<[^>]+>", "", text)
 
     # Remove image markdown that are just badges
@@ -91,7 +89,7 @@ def chunk_file(filepath: str) -> list[dict]:
     md_sections = md_splitter.split_text(doc["content"])
 
     char_splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 500,
+        chunk_size = 1000,
         chunk_overlap = 100,
         separators=[
             "\n```\n",
@@ -153,7 +151,7 @@ def chunk_batchs_in_multiprocess(file_paths: list[str], max_workers:int = None) 
 
 
 # Store chunks in ChromaDB
-def store_chunks(chunks: list[dict], vector_store: Chroma, project: str):
+def store_chunks(chunks: list[dict], vector_store: Chroma):
     """Convert chunk dicts to LangChain Documents and add to chromaDB"""
     documents = []
     ids = []
@@ -164,7 +162,6 @@ def store_chunks(chunks: list[dict], vector_store: Chroma, project: str):
                 page_content=chunk["text"],
                 metadata = {
                     "source": chunk["source"],
-                    "project": project,
                     "heading_trail": chunk["heading_trail"],
                 },
             )
@@ -180,20 +177,11 @@ def store_chunks(chunks: list[dict], vector_store: Chroma, project: str):
 
 # Clean old chunks before re-ingesting
 def clean_project(vector_store: Chroma, project: str):
-    """
-    Remove all existing chunks for a project before re-ingesting.
-    This prevents stale/orphaned chunks when files are edited
-    and chunk boundaries shift.
- 
-    Only deletes chunks for the given project — other projects
-    in the same ChromaDB collection are untouched.
-    """
     try:
-        vector_store._collection.delete(where={"project": project})
-        print(f"[Clean] Removed old chunks for project: {project}")
+        vector_store._client.delete_collection(project)
+        print(f"[Clean] Dropped collection: {project}")
     except Exception:
-        # First run — nothing to delete
-        print(f"[Clean] No existing data for project: {project}")
+        print(f"[Clean] No existing collection for: {project}")
 
 
 
@@ -269,7 +257,7 @@ def run_pipeline(
  
         # Store in vector DB
         if chunks:
-            store_chunks(chunks, vector_store, project)
+            store_chunks(chunks, vector_store)
             total_chunks += len(chunks)
  
         # Free memory before next batch
@@ -296,10 +284,8 @@ def run_pipeline(
     return vector_store
  
 
-
-
 # Let's Run data ingestion Pipeline
-# dir_path = Path("data/fastapi/docs").resolve()
-# run_pipeline(docs_path=dir_path, project="fastapi",max_workers=8, fresh=True)
-
+dir_path = Path("data/next_js/docs").resolve()
+print(dir_path)
+run_pipeline(docs_path=dir_path, project="nextjs",max_workers=8, fresh=False)
 

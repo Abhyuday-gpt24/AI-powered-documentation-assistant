@@ -1,0 +1,1110 @@
+{
+  "aggregate": {
+    "total_queries": 41,
+    "avg_keyword_match": 0.8829,
+    "source_hit_rate": 1.0,
+    "mrr": 0.7744
+  },
+  "per_category": {
+    "Routing": {
+      "count": 8,
+      "avg_keyword_score": 0.96875,
+      "source_hit_rate": 1.0,
+      "mrr": 0.71875
+    },
+    "Data Fetching": {
+      "count": 4,
+      "avg_keyword_score": 0.9375,
+      "source_hit_rate": 1.0,
+      "mrr": 0.6875
+    },
+    "Caching": {
+      "count": 4,
+      "avg_keyword_score": 0.9375,
+      "source_hit_rate": 1.0,
+      "mrr": 0.75
+    },
+    "Rendering": {
+      "count": 3,
+      "avg_keyword_score": 0.8333333333333334,
+      "source_hit_rate": 1.0,
+      "mrr": 0.611111111111111
+    },
+    "Middleware": {
+      "count": 2,
+      "avg_keyword_score": 0.75,
+      "source_hit_rate": 1.0,
+      "mrr": 0.75
+    },
+    "API": {
+      "count": 2,
+      "avg_keyword_score": 1.0,
+      "source_hit_rate": 1.0,
+      "mrr": 0.75
+    },
+    "Styling": {
+      "count": 2,
+      "avg_keyword_score": 0.7083333333333333,
+      "source_hit_rate": 1.0,
+      "mrr": 1.0
+    },
+    "Optimization": {
+      "count": 4,
+      "avg_keyword_score": 0.7291666666666666,
+      "source_hit_rate": 1.0,
+      "mrr": 0.875
+    },
+    "Configuration": {
+      "count": 3,
+      "avg_keyword_score": 0.8055555555555555,
+      "source_hit_rate": 1.0,
+      "mrr": 0.7777777777777778
+    },
+    "Deployment": {
+      "count": 2,
+      "avg_keyword_score": 0.8,
+      "source_hit_rate": 1.0,
+      "mrr": 0.6666666666666666
+    },
+    "Project Structure": {
+      "count": 2,
+      "avg_keyword_score": 0.8,
+      "source_hit_rate": 1.0,
+      "mrr": 0.625
+    },
+    "Auth": {
+      "count": 1,
+      "avg_keyword_score": 1.0,
+      "source_hit_rate": 1.0,
+      "mrr": 1.0
+    },
+    "i18n": {
+      "count": 1,
+      "avg_keyword_score": 1.0,
+      "source_hit_rate": 1.0,
+      "mrr": 1.0
+    },
+    "Testing": {
+      "count": 2,
+      "avg_keyword_score": 1.0,
+      "source_hit_rate": 1.0,
+      "mrr": 1.0
+    },
+    "Getting Started": {
+      "count": 1,
+      "avg_keyword_score": 1.0,
+      "source_hit_rate": 1.0,
+      "mrr": 1.0
+    }
+  },
+  "per_query": [
+    {
+      "id": 1,
+      "query": "How do I create a dynamic route in Next.js?",
+      "category": "Routing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "dynamic",
+        "params",
+        "slug",
+        "[slug]",
+        "page"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "02-dynamic-routes.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "01-pages-and-layouts.mdx",
+        "02-dynamic-routes.mdx",
+        "03-layouts-and-pages.mdx",
+        "02-dynamic-routes.mdx",
+        "03-layouts-and-pages.mdx"
+      ]
+    },
+    {
+      "id": 2,
+      "query": "What is a layout in the App Router?",
+      "category": "Routing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "layout",
+        "shared",
+        "children",
+        "app"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 4,
+      "matched_source": "layout.mdx",
+      "reciprocal_rank": 0.25,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "index.mdx",
+        "04-glossary.mdx",
+        "layout.mdx",
+        "production-checklist.mdx"
+      ]
+    },
+    {
+      "id": 3,
+      "query": "How do route groups work in Next.js?",
+      "category": "Routing",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "route group",
+        "parentheses",
+        "organize"
+      ],
+      "keywords_missing": [
+        "(folder)"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "route-groups.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "route-groups.mdx",
+        "04-glossary.mdx",
+        "04-linking-and-navigating.mdx",
+        "02-project-structure.mdx",
+        "02-project-structure.mdx"
+      ]
+    },
+    {
+      "id": 4,
+      "query": "What are parallel routes in Next.js?",
+      "category": "Routing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "parallel",
+        "slot",
+        "@",
+        "simultaneously"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "parallel-routes.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "parallel-routes.mdx",
+        "04-glossary.mdx",
+        "04-linking-and-navigating.mdx",
+        "parallel-routes.mdx",
+        "intercepting-routes.mdx"
+      ]
+    },
+    {
+      "id": 5,
+      "query": "How do intercepting routes work?",
+      "category": "Routing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "intercepting",
+        "modal",
+        "(..)",
+        "(.)"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "intercepting-routes.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "intercepting-routes.mdx",
+        "02-project-structure.mdx",
+        "cdn-caching.mdx",
+        "02-project-structure.mdx"
+      ]
+    },
+    {
+      "id": 6,
+      "query": "What is the loading.js file used for?",
+      "category": "Routing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "loading",
+        "Suspense",
+        "skeleton",
+        "streaming"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "loading.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "loading.mdx",
+        "streaming.mdx",
+        "streaming.mdx",
+        "streaming.mdx",
+        "loading.mdx"
+      ]
+    },
+    {
+      "id": 7,
+      "query": "How does the error.js boundary work?",
+      "category": "Routing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "error",
+        "boundary",
+        "reset",
+        "Error"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "error.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "error.mdx",
+        "10-error-handling.mdx",
+        "12-error-handling.mdx",
+        "12-error-handling.mdx"
+      ]
+    },
+    {
+      "id": 8,
+      "query": "How to use the Link component for navigation?",
+      "category": "Routing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "Link",
+        "href",
+        "navigation",
+        "prefetch"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "link.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "link.mdx",
+        "03-linking-and-navigating.mdx",
+        "link.mdx",
+        "03-layouts-and-pages.mdx",
+        "use-selected-layout-segment.mdx"
+      ]
+    },
+    {
+      "id": 9,
+      "query": "How to fetch data in a Server Component?",
+      "category": "Data Fetching",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "server",
+        "async",
+        "fetch",
+        "component"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "06-fetching-data.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "06-fetching-data.mdx",
+        "production-checklist.mdx",
+        "06-fetching-data.mdx",
+        "06-fetching-data.mdx",
+        "data-security.mdx"
+      ]
+    },
+    {
+      "id": 10,
+      "query": "What is streaming and how does Suspense work in Next.js?",
+      "category": "Data Fetching",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "streaming",
+        "Suspense",
+        "fallback",
+        "loading"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "loading.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "self-hosting.mdx",
+        "loading.mdx",
+        "04-glossary.mdx",
+        "loading.mdx",
+        "streaming.mdx"
+      ]
+    },
+    {
+      "id": 11,
+      "query": "How to fetch data on the client side in Next.js?",
+      "category": "Data Fetching",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "client",
+        "useEffect",
+        "SWR"
+      ],
+      "keywords_missing": [
+        "React Query"
+      ],
+      "source_hit": true,
+      "source_rank": 4,
+      "matched_source": "06-fetching-data.mdx",
+      "reciprocal_rank": 0.25,
+      "retrieved_sources": [
+        "01-get-static-props.mdx",
+        "index.mdx",
+        "05-client-side-rendering.mdx",
+        "06-fetching-data.mdx",
+        "01-pages-and-layouts.mdx"
+      ]
+    },
+    {
+      "id": 12,
+      "query": "How do Server Actions and mutations work?",
+      "category": "Data Fetching",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "server action",
+        "use server",
+        "form",
+        "mutation"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "form.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "form.mdx",
+        "04-glossary.mdx",
+        "form.mdx",
+        "unauthorized.mdx",
+        "forbidden.mdx"
+      ]
+    },
+    {
+      "id": 13,
+      "query": "How does caching work in Next.js App Router?",
+      "category": "Caching",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "cache",
+        "revalidate",
+        "dynamic"
+      ],
+      "keywords_missing": [
+        "static"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "08-caching.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "08-caching.mdx",
+        "public-folder.mdx",
+        "prefetching.mdx",
+        "04-glossary.mdx",
+        "cdn-caching.mdx"
+      ]
+    },
+    {
+      "id": 14,
+      "query": "What is the use cache directive?",
+      "category": "Caching",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "use cache",
+        "cache",
+        "directive",
+        "cacheLife"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "08-caching.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "08-caching.mdx",
+        "use-cache-remote.mdx",
+        "use-cache.mdx",
+        "use-cache-private.mdx"
+      ]
+    },
+    {
+      "id": 15,
+      "query": "How to revalidate cached data on demand?",
+      "category": "Caching",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "revalidateTag",
+        "revalidatePath",
+        "on-demand"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "09-revalidating.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "09-revalidating.mdx",
+        "caching-without-cache-components.mdx",
+        "09-revalidating.mdx",
+        "route.mdx",
+        "04-glossary.mdx"
+      ]
+    },
+    {
+      "id": 16,
+      "query": "What is Incremental Static Regeneration (ISR)?",
+      "category": "Caching",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "ISR",
+        "revalidate",
+        "static",
+        "regeneration",
+        "incremental"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "incremental-static-regeneration.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "incremental-static-regeneration.mdx",
+        "incremental-static-regeneration.mdx",
+        "incremental-static-regeneration.mdx",
+        "get-static-paths.mdx"
+      ]
+    },
+    {
+      "id": 17,
+      "query": "What is the difference between Server and Client Components?",
+      "category": "Rendering",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "server component",
+        "client component",
+        "use client"
+      ],
+      "keywords_missing": [
+        "rendering"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "05-server-and-client-components.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "05-server-and-client-components.mdx",
+        "05-server-and-client-components.mdx",
+        "05-server-and-client-components.mdx",
+        "04-glossary.mdx",
+        "07-mutating-data.mdx"
+      ]
+    },
+    {
+      "id": 18,
+      "query": "How does static rendering work in Next.js?",
+      "category": "Rendering",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "static",
+        "build",
+        "prerender"
+      ],
+      "keywords_missing": [
+        "SSG"
+      ],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "rendering-philosophy.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "content-security-policy.mdx",
+        "rendering-philosophy.mdx",
+        "08-caching.mdx",
+        "production-checklist.mdx",
+        "02-static-site-generation.mdx"
+      ]
+    },
+    {
+      "id": 19,
+      "query": "What is Partial Prerendering (PPR)?",
+      "category": "Rendering",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "partial",
+        "prerendering",
+        "PPR",
+        "shell",
+        "streaming"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 3,
+      "matched_source": "ppr-platform-guide.mdx",
+      "reciprocal_rank": 0.3333333333333333,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "prefetching.mdx",
+        "ppr-platform-guide.mdx",
+        "04-glossary.mdx",
+        "public-static-pages.mdx"
+      ]
+    },
+    {
+      "id": 20,
+      "query": "How to use middleware in Next.js?",
+      "category": "Middleware",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "middleware",
+        "NextResponse",
+        "request"
+      ],
+      "keywords_missing": [
+        "matcher"
+      ],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "middleware.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "codemods.mdx",
+        "middleware.mdx",
+        "backend-for-frontend.mdx",
+        "16-proxy.mdx",
+        "backend-for-frontend.mdx"
+      ]
+    },
+    {
+      "id": 21,
+      "query": "How does the proxy.ts file replace middleware?",
+      "category": "Middleware",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "proxy",
+        "middleware",
+        "runtime"
+      ],
+      "keywords_missing": [
+        "NextRequest"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "proxy.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "proxy.mdx",
+        "proxy.mdx",
+        "version-16.mdx",
+        "version-16.mdx",
+        "backend-for-frontend.mdx"
+      ]
+    },
+    {
+      "id": 22,
+      "query": "How to create an API route handler in the App Router?",
+      "category": "API",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "route",
+        "handler",
+        "GET",
+        "POST",
+        "Response"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "15-route-handlers.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "15-route-handlers.mdx",
+        "15-route-handlers.mdx",
+        "07-api-routes.mdx",
+        "index.mdx"
+      ]
+    },
+    {
+      "id": 23,
+      "query": "How to handle different HTTP methods in route handlers?",
+      "category": "API",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "handler"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "07-api-routes.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "07-api-routes.mdx",
+        "04-glossary.mdx",
+        "route.mdx",
+        "15-route-handlers.mdx",
+        "route.mdx"
+      ]
+    },
+    {
+      "id": 24,
+      "query": "How to use CSS Modules in Next.js?",
+      "category": "Styling",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "CSS Modules",
+        "module.css",
+        "styles"
+      ],
+      "keywords_missing": [
+        "className"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "post-css.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "post-css.mdx",
+        "11-css.mdx",
+        "css-in-js.mdx",
+        "11-css.mdx",
+        "11-css.mdx"
+      ]
+    },
+    {
+      "id": 25,
+      "query": "How to set up Tailwind CSS with Next.js?",
+      "category": "Styling",
+      "keyword_score": 0.6666666666666666,
+      "keywords_found": [
+        "Tailwind",
+        "PostCSS"
+      ],
+      "keywords_missing": [
+        "tailwind.config"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "11-css.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "11-css.mdx",
+        "11-css.mdx",
+        "tailwind-v3-css.mdx",
+        "tailwind-v3-css.mdx",
+        "11-css.mdx"
+      ]
+    },
+    {
+      "id": 26,
+      "query": "How does the Next.js Image component optimize images?",
+      "category": "Optimization",
+      "keyword_score": 0.6666666666666666,
+      "keywords_found": [
+        "Image",
+        "next/image",
+        "lazy",
+        "optimization"
+      ],
+      "keywords_missing": [
+        "width",
+        "height"
+      ],
+      "source_hit": true,
+      "source_rank": 2,
+      "matched_source": "12-images.mdx",
+      "reciprocal_rank": 0.5,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "12-images.mdx",
+        "self-hosting.mdx",
+        "image.mdx",
+        "self-hosting.mdx"
+      ]
+    },
+    {
+      "id": 27,
+      "query": "How to optimize fonts in Next.js?",
+      "category": "Optimization",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "font",
+        "next/font",
+        "Google"
+      ],
+      "keywords_missing": [
+        "preload"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "13-fonts.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "13-fonts.mdx",
+        "version-13.mdx",
+        "04-glossary.mdx",
+        "app-router-migration.mdx",
+        "13-fonts.mdx"
+      ]
+    },
+    {
+      "id": 28,
+      "query": "How to add metadata and SEO tags in Next.js?",
+      "category": "Optimization",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "metadata",
+        "title",
+        "description",
+        "generateMetadata",
+        "SEO"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "generate-metadata.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "generate-metadata.mdx",
+        "04-glossary.mdx",
+        "from-create-react-app.mdx",
+        "from-create-react-app.mdx",
+        "production-checklist.mdx"
+      ]
+    },
+    {
+      "id": 29,
+      "query": "How to configure the Next.js Script component?",
+      "category": "Optimization",
+      "keyword_score": 0.5,
+      "keywords_found": [
+        "Script",
+        "next/script"
+      ],
+      "keywords_missing": [
+        "strategy",
+        "lazyOnload"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "script.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "script.mdx",
+        "script.mdx",
+        "head.mdx",
+        "content-security-policy.mdx",
+        "scripts.mdx"
+      ]
+    },
+    {
+      "id": 30,
+      "query": "How to configure next.config.js?",
+      "category": "Configuration",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "next.config",
+        "NextConfig",
+        "module.exports"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "turbopackFileSystemCache.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "turbopackFileSystemCache.mdx",
+        "index.mdx",
+        "useLightningcss.mdx",
+        "authInterrupts.mdx",
+        "serverComponentsHmrCache.mdx"
+      ]
+    },
+    {
+      "id": 31,
+      "query": "How to set up environment variables in Next.js?",
+      "category": "Configuration",
+      "keyword_score": 0.75,
+      "keywords_found": [
+        "env",
+        "NEXT_PUBLIC",
+        "environment"
+      ],
+      "keywords_missing": [
+        ".env.local"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "environment-variables.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "environment-variables.mdx",
+        "environment-variables.mdx",
+        "env.mdx",
+        "from-create-react-app.mdx",
+        "self-hosting.mdx"
+      ]
+    },
+    {
+      "id": 32,
+      "query": "How to configure TypeScript in a Next.js project?",
+      "category": "Configuration",
+      "keyword_score": 0.6666666666666666,
+      "keywords_found": [
+        "TypeScript",
+        "tsconfig"
+      ],
+      "keywords_missing": [
+        "type checking"
+      ],
+      "source_hit": true,
+      "source_rank": 3,
+      "matched_source": "02-typescript.mdx",
+      "reciprocal_rank": 0.3333333333333333,
+      "retrieved_sources": [
+        "01-installation.mdx",
+        "from-vite.mdx",
+        "02-typescript.mdx",
+        "supported-browsers.mdx",
+        "from-vite.mdx"
+      ]
+    },
+    {
+      "id": 33,
+      "query": "How to deploy a Next.js app?",
+      "category": "Deployment",
+      "keyword_score": 0.6,
+      "keywords_found": [
+        "deploy",
+        "build",
+        "start"
+      ],
+      "keywords_missing": [
+        "production",
+        "Vercel"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "11-deploying.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "11-deploying.mdx",
+        "17-deploying.mdx",
+        "17-deploying.mdx",
+        "17-deploying.mdx",
+        "static-exports.mdx"
+      ]
+    },
+    {
+      "id": 34,
+      "query": "How does static export work in Next.js?",
+      "category": "Deployment",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "static",
+        "export",
+        "output",
+        "HTML"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 3,
+      "matched_source": "17-deploying.mdx",
+      "reciprocal_rank": 0.3333333333333333,
+      "retrieved_sources": [
+        "04-glossary.mdx",
+        "single-page-applications.mdx",
+        "17-deploying.mdx",
+        "single-page-applications.mdx",
+        "static-exports.mdx"
+      ]
+    },
+    {
+      "id": 35,
+      "query": "What is the recommended project structure for Next.js?",
+      "category": "Project Structure",
+      "keyword_score": 0.8,
+      "keywords_found": [
+        "app",
+        "pages",
+        "src",
+        "structure"
+      ],
+      "keywords_missing": [
+        "public"
+      ],
+      "source_hit": true,
+      "source_rank": 4,
+      "matched_source": "index.mdx",
+      "reciprocal_rank": 0.25,
+      "retrieved_sources": [
+        "02-project-structure.mdx",
+        "02-project-structure.mdx",
+        "02-project-structure.mdx",
+        "index.mdx",
+        "02-project-structure.mdx"
+      ]
+    },
+    {
+      "id": 36,
+      "query": "What are the special files in the App Router?",
+      "category": "Project Structure",
+      "keyword_score": 0.8,
+      "keywords_found": [
+        "page",
+        "layout",
+        "loading",
+        "error"
+      ],
+      "keywords_missing": [
+        "not-found"
+      ],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "index.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "index.mdx",
+        "04-glossary.mdx",
+        "15-route-handlers.mdx",
+        "streaming.mdx",
+        "index.mdx"
+      ]
+    },
+    {
+      "id": 37,
+      "query": "How to implement authentication in Next.js?",
+      "category": "Auth",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "auth",
+        "session",
+        "login",
+        "protect"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "authentication.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "authentication.mdx",
+        "authentication.mdx",
+        "authentication.mdx",
+        "authentication.mdx",
+        "data-security.mdx"
+      ]
+    },
+    {
+      "id": 38,
+      "query": "How to add internationalization (i18n) to a Next.js app?",
+      "category": "i18n",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "i18n",
+        "locale",
+        "internationalization",
+        "language"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "internationalization.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "internationalization.mdx",
+        "internationalization.mdx",
+        "internationalization.mdx",
+        "internationalization.mdx",
+        "internationalization.mdx"
+      ]
+    },
+    {
+      "id": 39,
+      "query": "How to set up testing in Next.js with Jest?",
+      "category": "Testing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "Jest",
+        "test",
+        "testing",
+        "config"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "jest.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "jest.mdx",
+        "jest.mdx",
+        "jest.mdx",
+        "jest.mdx",
+        "jest.mdx"
+      ]
+    },
+    {
+      "id": 40,
+      "query": "How to use Playwright for end-to-end testing in Next.js?",
+      "category": "Testing",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "Playwright",
+        "e2e",
+        "test",
+        "browser"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "playwright.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "playwright.mdx",
+        "playwright.mdx",
+        "playwright.mdx",
+        "playwright.mdx",
+        "playwright.mdx"
+      ]
+    },
+    {
+      "id": 41,
+      "query": "How to install and create a new Next.js project?",
+      "category": "Getting Started",
+      "keyword_score": 1.0,
+      "keywords_found": [
+        "create-next-app",
+        "install",
+        "npx",
+        "npm"
+      ],
+      "keywords_missing": [],
+      "source_hit": true,
+      "source_rank": 1,
+      "matched_source": "01-installation.mdx",
+      "reciprocal_rank": 1.0,
+      "retrieved_sources": [
+        "01-installation.mdx",
+        "01-installation.mdx",
+        "01-installation.mdx",
+        "01-installation.mdx",
+        "from-create-react-app.mdx"
+      ]
+    }
+  ]
+}

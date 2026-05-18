@@ -19,4 +19,5 @@ dependencies = [
     "langchain-openrouter>=0.2.3",
     "langgraph>=1.1.10",
     "python-dotenv>=1.2.2",
+    "tabulate>=0.10.0",
 ]
