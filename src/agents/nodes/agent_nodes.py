@@ -21,6 +21,7 @@ async def query_analyzer_node(state: AgentState) -> AgentState:
     response = await gpt_5_nano_structured_output.ainvoke([SystemMessage(QUERY_ANALYZER_SYS_PROMPT), *state["messages"][-6:]])
 
     result = response["parsed"]
+    print("Result : " , result)
 
     token_count = response["raw"].usage_metadata.get("total_tokens", 0) if hasattr(response["raw"], "usage_metadata") else 0
     if result.intent == "direct" and result.direct_reply:

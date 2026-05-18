@@ -19,7 +19,9 @@ async def chatbot_func(message: str, history: list[dict], thread_id: str) :
         "messages": [HumanMessage(content=(message))],
         "retrieval_result": "",
         "web_search_result": "",
-        "intent": ""
+        "intent": "",
+        "query": message,
+        "reframed_query": ""
     }
 
     full_response = ""
