@@ -17,8 +17,7 @@ class QueryAnalyzerInterface(BaseModel):
 gpt_5_nano_structured_output = gpt_5_nano_model.with_structured_output(QueryAnalyzerInterface, include_raw = True)
 # Query Analyzer Node
 async def query_analyzer_node(state: AgentState) -> AgentState:
-    print("----------------------------", [SystemMessage(QUERY_ANALYZER_SYS_PROMPT), *state["messages"][-6:]])
-    response = await gpt_5_nano_structured_output.ainvoke([SystemMessage(QUERY_ANALYZER_SYS_PROMPT), *state["messages"][-6:]])
+    response = await gpt_5_nano_structured_output.ainvoke([SystemMessage(QUERY_ANALYZER_SYS_PROMPT), *state["messages"]])
 
     result = response["parsed"]
     print("Result : " , result)
@@ -50,7 +49,7 @@ async def synthesizer_agent_node(state: AgentState) -> AgentState:
 
     response = await deepseek_flash_model.ainvoke([
         context_msg,
-        *state["messages"][-6:],
+        *state["messages"],
     ])
     return {"messages": [response]}
 
