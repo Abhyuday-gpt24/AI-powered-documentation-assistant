@@ -12,3 +12,5 @@ langchain-chroma
 gradio
 python-dotenv
 langchain-mcp-adapters
+chromadb
+modal
