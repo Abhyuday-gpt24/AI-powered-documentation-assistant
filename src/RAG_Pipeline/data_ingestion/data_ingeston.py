@@ -77,9 +77,9 @@ def run_pipeline(
     print(f"{'='*50}\n")
  
 # Run data ingestion pipeline
-dir_path = Path("data/next_js/docs").resolve()
-print(dir_path)
+# dir_path = Path("data/next_js/docs").resolve()
+# print(dir_path)
 
-def runpipe():
-    run_pipeline(doc_paths=dir_path,max_workers=4)
+# def runpipe():
+#     run_pipeline(doc_paths=dir_path,max_workers=4)
 

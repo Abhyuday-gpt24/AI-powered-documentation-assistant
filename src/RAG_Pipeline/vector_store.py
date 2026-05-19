@@ -48,7 +48,7 @@ def get_retriever(k=5):
     if collection in retrievers:
         return retrievers[collection]
 
-    retriever = get_vector_store(collection).as_retriever(
+    retriever = get_vector_store().as_retriever(
         search_type="mmr",
         search_kwargs={"k": k, "fetch_k": 25, "lambda_mult": 0.8},
     )
