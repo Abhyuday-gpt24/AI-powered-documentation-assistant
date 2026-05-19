@@ -1,9 +1,8 @@
 from langchain_core.documents import Document
-from langchain_chroma import Chroma
 
-# Store chunks in ChromaDB
-def store_chunks(chunks: list[dict], vector_store: Chroma):
-    """Convert chunk dicts to LangChain Documents and add to chromaDB"""
+
+def store_chunks(chunks: list[dict], vector_store):
+    """Convert chunk dicts to LangChain Documents and add to Pinecone"""
     documents = []
     ids = []
 
@@ -11,7 +10,7 @@ def store_chunks(chunks: list[dict], vector_store: Chroma):
         documents.append(
             Document(
                 page_content=chunk["text"],
-                metadata = {
+                metadata={
                     "source": chunk["source"],
                     "heading_trail": chunk["heading_trail"],
                 },
@@ -19,4 +18,5 @@ def store_chunks(chunks: list[dict], vector_store: Chroma):
         )
         ids.append(chunk["chunk_id"])
 
-    vector_store.add_documents(documents, ids = ids)
+    vector_store.add_documents(documents, ids=ids)
+    return ids

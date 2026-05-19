@@ -21,7 +21,6 @@ def collect_files(dir_path: str)-> list[str]:
 # Full Pipeline
 def run_pipeline(
     doc_paths:str, 
-    project:str, 
     batch_size:int = 20, 
     max_workers:int = None, 
 ):
@@ -34,7 +33,7 @@ def run_pipeline(
         print("No Files Found!")
         return
     
-    vector_store = get_vector_store(collection=project)
+    vector_store = get_vector_store()
 
     # Process in batches
     total_files = len(file_paths)
@@ -55,7 +54,7 @@ def run_pipeline(
  
         # Store in vector DB
         if chunks:
-            store_chunks(chunks, vector_store)
+            ids = store_chunks(chunks, vector_store)
             total_chunks += len(chunks)
  
         # Free memory before next batch
@@ -71,7 +70,7 @@ def run_pipeline(
  
     # Summary Status
     print(f"\n{'='*50}")
-    print(f"  Project:     {project}")
+    print(f"  Project:     {os.getenv("NAMESPACE_METADATA")}")
     print(f"  Files:       {total_files}")
     print(f"  Chunks:      {total_chunks}")
     print(f"  Time:        {elapsed:.1f}s")
@@ -82,5 +81,5 @@ dir_path = Path("data/next_js/docs").resolve()
 print(dir_path)
 
 def runpipe():
-    run_pipeline(doc_paths=dir_path, project="nextjs",max_workers=4)
+    run_pipeline(doc_paths=dir_path,max_workers=4)
 

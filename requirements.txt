@@ -8,9 +8,8 @@ langchain-google-genai
 langchain-groq
 langchain-openrouter
 ipykernel
-langchain-chroma
 gradio
 python-dotenv
 langchain-mcp-adapters
-chromadb
-modal
+langchain-pinecone
+pinecone-client
