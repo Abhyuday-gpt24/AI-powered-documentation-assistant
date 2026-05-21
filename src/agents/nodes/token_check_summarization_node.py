@@ -1,66 +1,148 @@
 from src.agents.graph_state import AgentState
 from src.models.models import gpt_5_nano_model
 from src.agents.sys_prompts.conv_summarizer_sys_prompt import CONV_SUMMARIZER_SYS_PROMPT
-from langchain_core.messages import HumanMessage, SystemMessage, RemoveMessage
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, RemoveMessage
+
+BASE_TRUNCATION_LIMIT = 12500
+TRUNCATION_MULTIPLIER = 1.25
+BASE_SUMMARIZATION_LIMIT = 100000
+SUMMARIZATION_MULTIPLIER = 1.25
+KEEP_LAST_N_IN_SUMMARIZATION = 10
+KEEP_LAST_N_IN_TRUNCATION = 5
+SUMMARIZATION_WORD_LIMIT = 1000
+max_chars = 250
 
 
+def truncate_text(text: str):
+    """Truncate at sentence boundary, preserving 1-2 complete sentences."""
+    if len(text) <= max_chars:
+        return text
 
-# Tokens checking for summarization
-async def token_check_node(State: AgentState) -> AgentState:
-    input_tokens = State["input_tokens"]
-    print("Context_used : ------", input_tokens)
-    if input_tokens > 12500:
-        print("----------------------------------- ALERT TOKEN LIMIT REACHED ----------------------------------")
-        print("Summarizing History.")
+    for sep in ['. ', '.\n', '! ', '?\n', '? ']:
+        idx = text[:max_chars].rfind(sep)
+        if idx > 50:
+            return text[:idx + 1] + " [truncated]"
 
-        messages = State["messages"]
-        existing_summary = State.get("summary", "")
+    idx = text[:max_chars].rfind(' ')
+    if idx > 0:
+        return text[:idx] + "... [truncated]"
 
-        # Reverse loop
-        cut = None
-        for i in range(len(messages) - 1, -1, -1):
-            msg = messages[i]
-            has_tool_calls = hasattr(msg, "tool_calls") and msg.tool_calls
-            has_tool_call_id = hasattr(msg, "tool_call_id") and msg.tool_call_id
+    return text[:max_chars] + "... [truncated]"
 
-            if not has_tool_calls and not has_tool_call_id:
-                cut = i
-                break
 
-        if cut is None or cut <= 0:
+def truncate_history_msgs(state: AgentState):
+    truncated_msgs = []
+    msgs = state["messages"]
+    for msg in msgs[:-KEEP_LAST_N_IN_TRUNCATION]:
+        if not isinstance(msg, (AIMessage, HumanMessage)):
+            continue
+        id = msg.id
+        response_metadata = msg.response_metadata
+        content = msg.content if len(msg.content) < max_chars else truncate_text(text=msg.content)
+        if isinstance(msg, AIMessage):
+            truncated_msgs.append(AIMessage(id=id, response_metadata=response_metadata, content=content))
+        if isinstance(msg, HumanMessage):
+            truncated_msgs.append(HumanMessage(id=id, response_metadata=response_metadata, content=content))
+
+    return truncated_msgs
+
+
+def get_current_truncation_limit(truncation_count: int) -> float:
+    """Calculate the current truncation limit based on how many truncations have occurred."""
+    return BASE_TRUNCATION_LIMIT * (TRUNCATION_MULTIPLIER ** truncation_count)
+
+def get_current_summarization_limit(summarization_count: int) -> dict:
+    """Calculate the current summarization limit based on how many summarizations have occurred."""
+    curr_sum_token_limit = BASE_SUMMARIZATION_LIMIT * (SUMMARIZATION_MULTIPLIER ** summarization_count)
+    curr_sum_word_limit = SUMMARIZATION_WORD_LIMIT * (SUMMARIZATION_MULTIPLIER ** summarization_count)
+    return {
+        "curr_sum_token_limit": curr_sum_token_limit,
+        "curr_sum_word_limit": curr_sum_word_limit
+    }
+
+
+def find_keep_from_index(messages, KEEP_LAST_N_IN_SUMMARIZATION: int) -> int:
+    """Find the index from which to keep the last N safe (non-tool) messages."""
+    safe_count = 0
+    for i in range(len(messages) - 1, -1, -1):
+        msg = messages[i]
+        has_tool_calls = hasattr(msg, "tool_calls") and msg.tool_calls
+        has_tool_call_id = hasattr(msg, "tool_call_id") and msg.tool_call_id
+
+        if not has_tool_calls and not has_tool_call_id:
+            safe_count += 1
+            if safe_count >= KEEP_LAST_N_IN_SUMMARIZATION:
+                return i
+    return 0 
+
+
+async def token_check_node(state: AgentState) -> AgentState:
+    input_tokens = state["input_tokens"]
+    truncation_count = state.get("truncation_count", 0)
+    current_truncate_limit = get_current_truncation_limit(truncation_count)
+
+    # print(f"Input Tokens: {input_tokens} | Truncation #{truncation_count} | Current Limit: {current_truncate_limit:.0f}")
+
+    # if input_tokens <= current_truncate_limit:
+    #     return {}
+    
+    summarization_count = state.get("summarization_count", 0)
+    sum_limits = get_current_summarization_limit(summarization_count)
+    curr_sum_token_limit = sum_limits["curr_sum_token_limit"]
+    curr_sum_word_limit = sum_limits["curr_sum_word_limit"]
+
+    # Full summarization when tokens > 100k
+    if input_tokens > curr_sum_token_limit:
+        print("========== SUMMARIZATION TRIGGERED (100k+ tokens) ==========")
+
+        messages = state["messages"]
+        existing_summary = state.get("summary", "")
+
+        keep_from_index = find_keep_from_index(messages, KEEP_LAST_N_IN_SUMMARIZATION)
+        msgs_to_summarize = messages[:keep_from_index]
+
+        if not msgs_to_summarize:
             return {}
-
-        msg_to_summarize = messages[:cut]
 
         if existing_summary:
             user_prompt = (
                 f"Previous conversation summary:\n{existing_summary}\n\n"
                 "Extend the previous summary with this new chat history. "
-                "Summarize the whole conversation in 700-1000 words only. "
+                F"Summarize the whole conversation in {curr_sum_word_limit} words only. "
                 "Keep it concise."
             )
         else:
             user_prompt = (
                 "I have given you chat history of the user. "
-                "Summarize the whole conversation in 700-1000 words only. "
+                f"Summarize the whole conversation in {curr_sum_word_limit} words only. "
                 "Keep it concise."
             )
 
         response = await gpt_5_nano_model.ainvoke([
             SystemMessage(CONV_SUMMARIZER_SYS_PROMPT),
-            *msg_to_summarize,
+            *msgs_to_summarize,
             HumanMessage(user_prompt),
         ])
 
-        snapshot_ids = {m.id for m in msg_to_summarize}
-        delete_ops = [
-            RemoveMessage(id=m.id)
-            for m in messages
-            if m.id in snapshot_ids
-        ]
-        print("SUMMARY : --------------------- :", response.content)
+        snapshot_ids = {m.id for m in msgs_to_summarize}
+        delete_ops = [RemoveMessage(id=m.id) for m in messages if m.id in snapshot_ids]
+
+        print(f"SUMMARY (kept last {len(messages) - keep_from_index} msgs): {response.content[:200]}...")
+
         return {
             "messages": delete_ops,
             "summary": response.content,
+            "truncation_count": 0,  # reset after summarization
+            "summarization_count": summarization_count + 1
         }
-    return {}
+
+    if input_tokens > current_truncate_limit:
+        # Progressive truncation (< 100k)
+        print(f"--- TRUNCATION #{truncation_count + 1} (limit was {current_truncate_limit:.0f}) ---")
+
+        truncated_msgs = truncate_history_msgs(state)
+        
+        return {
+            "messages": truncated_msgs,
+            "truncation_count": truncation_count + 1,
+        }

@@ -12,12 +12,16 @@ class QueryAnalyzerInterface(BaseModel):
     reframed_query: str = Field(description="Corrected / Reframed user's query for friendly search.")
     direct_reply: str = Field(description="actual reply if intent is direct, else empty.")
 
-
-
 gpt_5_nano_structured_output = gpt_5_nano_model.with_structured_output(QueryAnalyzerInterface, include_raw = True)
+
+
 # Query Analyzer Node
 async def query_analyzer_node(state: AgentState) -> AgentState:
-    response = await gpt_5_nano_structured_output.ainvoke([SystemMessage(QUERY_ANALYZER_SYS_PROMPT), *state["messages"]])
+    summary = state.get("summary", "")
+    system_prompt = QUERY_ANALYZER_SYS_PROMPT
+    if summary:
+        system_prompt += f"\n\nPrevious conversation summary:\n{summary}"
+    response = await gpt_5_nano_structured_output.ainvoke([SystemMessage(system_prompt), *state["messages"]])
 
     result = response["parsed"]
     print("Result : " , result)
@@ -42,14 +46,20 @@ async def synthesizer_agent_node(state: AgentState) -> AgentState:
     kb = state.get("retrieval_result", "")
     web = state.get("web_search_result", "")
 
-    context_msg = SystemMessage(
-        f"{SYNTHESIZER_AGENT_SYS_PROMPT}\n\n"
-        f"Retrieved context:\n{kb}\n\nWeb search results:\n{web}"
-    )
+
+
+    summary = state.get("summary", "")
+
+    sys_prompt = SYNTHESIZER_AGENT_SYS_PROMPT
+    sys_prompt += f"\n\nRetrieved context:\n{kb}\n\nWeb search results:\n{web}"
+    if summary:
+        sys_prompt += f"\n\nPrevious conversation summary:\n{summary}"
 
     response = await deepseek_flash_model.ainvoke([
-        context_msg,
+        SystemMessage(sys_prompt),
         *state["messages"],
     ])
     return {"messages": [response]}
 
+
+    
